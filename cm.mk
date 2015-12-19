@@ -1,4 +1,4 @@
-# Copyright (C) 2015 The CyanogenMod Project
+# Copyright (C) 2014 The CyanogenMod Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,6 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Boot animation
+TARGET_SCREEN_HEIGHT := 2560
+TARGET_SCREEN_WIDTH := 1440
+
+TARGET_CONTINUOUS_SPLASH_ENABLED := true
+
 # Inherit from those products. Most specific first.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
@@ -22,17 +28,19 @@ $(call inherit-product, device/lenovo/kingdom_row/kingdom_row.mk)
 $(call inherit-product, vendor/cm/config/nfc_enhanced.mk)
 
 # Inherit some common CM stuff.
-$(call inherit-product, vendor/cm/config/common_full_phone.mk)
+$(call inherit-product, vendor/cm/config/common_mini_phone.mk)
 
 PRODUCT_NAME := cm_kingdom_row
 PRODUCT_DEVICE := kingdom_row
+PRODUCT_BRAND := Lenovo
 PRODUCT_MANUFACTURER := Lenovo
 PRODUCT_MODEL := K920
 
 PRODUCT_GMS_CLIENTID_BASE := android-lenovo
 
-PRODUCT_BRAND := Lenovo
-TARGET_VENDOR := lenovo
-TARGET_VENDOR_PRODUCT_NAME := kingdom_row
-TARGET_VENDOR_DEVICE_NAME := kingdom_row
-PRODUCT_BUILD_PROP_OVERRIDES += TARGET_DEVICE=kingdom_row PRODUCT_NAME=kingdom_row
+# Device prop
+PRODUCT_BUILD_PROP_OVERRIDES += \
+    TARGET_DEVICE="kingdom_row" \
+    PRODUCT_NAME="kingdom_row" \
+    BUILD_FINGERPRINT="Lenovo/kingdom_row/kingdom_row:5.1.1/LMY48M/5.9.17:userdebug/test-keys" \
+    PRIVATE_BUILD_DESC="kingdom_row-userdebug 5.1.1 LMY48M 5.9.17 test-keys"

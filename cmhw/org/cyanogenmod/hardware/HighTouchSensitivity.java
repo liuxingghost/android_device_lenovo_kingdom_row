@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 The CyanogenMod Project
+ * Copyright (C) 2015 The CyanogenMod Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,25 +16,50 @@
 
 package org.cyanogenmod.hardware;
 
-import java.io.File;
 import org.cyanogenmod.hardware.util.FileUtils;
 
+import java.io.File;
+
 /**
- * Glove mode / high touch sensitivity
+ * High touch sensitivity
+ *
+ * TS     = Mi3w
+ * TS_640 = Mi4
  */
 public class HighTouchSensitivity {
 
-    private static String GLOVE_PATH = "/sys/devices/virtual/touch/tp_dev/glove_on";
+    // Atmel Glove Mode
+    private static String GLOVE_PATH_TS = "/sys/bus/i2c/drivers/atmel_mxt_ts/2-004a/sensitive_mode";
+    private static String GLOVE_PATH_TS_640 = "/sys/bus/i2c/drivers/atmel_mxt_ts_640t/2-004b/sensitive_mode";
+    // Atmel Stylus mode
+    private static String STYLUS_PATH_TS = "/sys/bus/i2c/drivers/atmel_mxt_ts/2-004a/stylus";
+    private static String STYLUS_PATH_TS_640 = "/sys/bus/i2c/drivers/atmel_mxt_ts_640t/2-004b/stylus";
+
+    private static String sensitiveMode_path() {
+        File glove_ts = new File(GLOVE_PATH_TS);
+        if (glove_ts.exists()) {
+            return GLOVE_PATH_TS;
+        } else {
+            return GLOVE_PATH_TS_640;
+        }
+    };
+
+    private static String stylus_path() {
+        File stylus_ts = new File(STYLUS_PATH_TS);
+        if (stylus_ts.exists()) {
+            return STYLUS_PATH_TS;
+        } else {
+            return STYLUS_PATH_TS_640;
+        }
+    };
+
 
     /**
      * Whether device supports high touch sensitivity.
      *
      * @return boolean Supported devices must return always true
      */
-    public static boolean isSupported() {
-        File f = new File(GLOVE_PATH);
-        return f.exists();
-    }
+    public static boolean isSupported() { return true; }
 
     /**
      * This method return the current activation status of high touch sensitivity
@@ -43,10 +68,7 @@ public class HighTouchSensitivity {
      * or the operation failed while reading the status; true in any other case.
      */
     public static boolean isEnabled() {
-        int i;
-        i = Integer.parseInt(FileUtils.readOneLine(GLOVE_PATH));
-
-        return i == 1 ? true : false;
+        return (FileUtils.readOneLine(sensitiveMode_path()).equals("1")) && FileUtils.readOneLine(stylus_path()).equals("1");
     }
 
     /**
@@ -56,8 +78,8 @@ public class HighTouchSensitivity {
      * @return boolean Must be false if high touch sensitivity is not supported or the operation
      * failed; true in any other case.
      */
-    public static boolean setEnabled(boolean status) {
-        return FileUtils.writeLine(GLOVE_PATH, String.valueOf(status ? 1 : 0));
+    public static boolean setEnabled(boolean state) {
+        return FileUtils.writeLine(sensitiveMode_path(), (state ? "1" : "0")) && FileUtils.writeLine(stylus_path(), (state ? "1" : "0"));
     }
 
 }

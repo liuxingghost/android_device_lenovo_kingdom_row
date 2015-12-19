@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 The CyanogenMod Project
+ * Copyright (C) 2015 The CyanogenMod Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ package org.cyanogenmod.hardware;
 
 import org.cyanogenmod.hardware.util.FileUtils;
 
+import java.io.File;
 /*
  * Disable capacitive keys
  *
@@ -25,20 +26,36 @@ import org.cyanogenmod.hardware.util.FileUtils;
  * can be fully disabled for replacement with a soft navbar. You
  * really should not be using this on a device with mechanical or
  * otherwise visible-when-inactive keys
+ *
+ * TS     = Mi3w
+ * TS_640 = Mi4
  */
 
 public class KeyDisabler {
 
-    private static String CONTROL_PATH = "/sys/devices/virtual/touch/tp_dev/0dbutton";
+    // Mi3w
+    private static String CONTROL_PATH_TS = "/sys/bus/i2c/drivers/atmel_mxt_ts/2-004a/keys_off";
+    // Mi4
+    private static String CONTROL_PATH_TS_640 = "/sys/bus/i2c/drivers/atmel_mxt_ts_640t/2-004b/keys_off";
+
+    private static String KeyDisabler_path() {
+        File ts = new File(CONTROL_PATH_TS);
+        File ts_640 = new File(CONTROL_PATH_TS_640);
+        if (ts.exists()) {
+            return CONTROL_PATH_TS;
+        } else {
+            return CONTROL_PATH_TS_640;
+        }
+    };
 
     public static boolean isSupported() { return true; }
 
     public static boolean isActive() {
-        return (FileUtils.readOneLine(CONTROL_PATH).equals("0"));
+        return (FileUtils.readOneLine(KeyDisabler_path()).equals("0"));
     }
 
     public static boolean setActive(boolean state) {
-        return FileUtils.writeLine(CONTROL_PATH, (state ? "0" : "1"));
+        return FileUtils.writeLine(KeyDisabler_path(), (state ? "1" : "0"));
     }
 
 }
