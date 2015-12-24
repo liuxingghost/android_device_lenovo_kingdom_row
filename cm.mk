@@ -16,8 +16,6 @@
 TARGET_SCREEN_HEIGHT := 2560
 TARGET_SCREEN_WIDTH := 1440
 
-TARGET_CONTINUOUS_SPLASH_ENABLED := true
-
 # Inherit from those products. Most specific first.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
@@ -34,13 +32,15 @@ PRODUCT_NAME := cm_kingdom_row
 PRODUCT_DEVICE := kingdom_row
 PRODUCT_BRAND := Lenovo
 PRODUCT_MANUFACTURER := Lenovo
-PRODUCT_MODEL := K920
+PRODUCT_MODEL := Lenovo K920
 
 PRODUCT_GMS_CLIENTID_BASE := android-lenovo
+
+TARGET_CONTINUOUS_SPLASH_ENABLED := true
 
 # Device prop
 PRODUCT_BUILD_PROP_OVERRIDES += \
     TARGET_DEVICE="kingdom_row" \
     PRODUCT_NAME="kingdom_row" \
-    BUILD_FINGERPRINT="Lenovo/kingdom_row/kingdom_row:5.1.1/LMY48M/5.9.17:userdebug/test-keys" \
+    BUILD_FINGERPRINT=“Lenovo/kingdom_row/kingdom_row:5.1.1/LMY48M/5.9.17:userdebug/test-keys" \
     PRIVATE_BUILD_DESC="kingdom_row-userdebug 5.1.1 LMY48M 5.9.17 test-keys"

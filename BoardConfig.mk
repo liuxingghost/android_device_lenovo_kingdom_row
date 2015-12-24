@@ -15,86 +15,83 @@
 #
 BOARD_VENDOR := lenovo
 
-CANCRO_PATH := device/lenovo/kingdom_row
+KINGDOM_ROW_PATH := device/lenovo/kingdom_row
 
 # ReleaseTools
-TARGET_RELEASETOOLS_EXTENSIONS := $(CANCRO_PATH)/releasetools
-
-# Include path
-TARGET_SPECIFIC_HEADER_PATH := $(CANCRO_PATH)/include
+TARGET_RELEASETOOLS_EXTENSIONS := $(KINGDOM_ROW_PATH)/releasetools
 
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := MSM8974
-TARGET_NO_BOOTLOADER := true
-TARGET_NO_RADIOIMAGE := true
+TARGET_NO_BOOTLOADER         := true
+TARGET_NO_RADIOIMAGE         := true
 
 # Platform
-TARGET_BOARD_PLATFORM := msm8974
+TARGET_BOARD_PLATFORM     := msm8974
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno330
 
 USE_CLANG_PLATFORM_BUILD := true
 
 # Architecture
-TARGET_ARCH := arm
+TARGET_ARCH         := arm
 TARGET_ARCH_VARIANT := armv7-a-neon
-TARGET_CPU_ABI := armeabi-v7a
-TARGET_CPU_ABI2 := armeabi
-TARGET_CPU_SMP := true
-TARGET_CPU_VARIANT := krait
+TARGET_CPU_ABI      := armeabi-v7a
+TARGET_CPU_ABI2     := armeabi
+TARGET_CPU_SMP      := true
+TARGET_CPU_VARIANT  := krait
 
 # Flags
-COMMON_GLOBAL_CFLAGS += -D__ARM_USE_PLD -D__ARM_CACHE_LINE_SIZE=64 -DNO_SECURE_DISCARD -DUSE_RIL_VERSION_10
+COMMON_GLOBAL_CFLAGS   += -D__ARM_USE_PLD -D__ARM_CACHE_LINE_SIZE=64 -DNO_SECURE_DISCARD -DUSE_RIL_VERSION_10
 COMMON_GLOBAL_CPPFLAGS += -DNO_SECURE_DISCARD -DUSE_RIL_VERSION_10
 
 # Kernel
-BOARD_KERNEL_CMDLINE := console=none vmalloc=340M androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37 ehci-hcd.park=3 androidboot.selinux=permissive
-BOARD_KERNEL_SEPARATED_DT := true
-BOARD_KERNEL_BASE        := 0x00000000
-BOARD_KERNEL_PAGESIZE    := 2048
-BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000 --tags_offset 0x01E00000
-TARGET_KERNEL_SOURCE := kernel/lenovo/msm8974
-TARGET_KERNEL_ARCH := arm
-TARGET_KERNEL_CONFIG := cyanogenmod_kingdom_row_defconfig
+BOARD_KERNEL_CMDLINE               := console=none vmalloc=340M androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37 ehci-hcd.park=3
+BOARD_KERNEL_SEPARATED_DT          := true
+BOARD_KERNEL_BASE                  := 0x00000000
+BOARD_KERNEL_PAGESIZE              := 2048
+BOARD_MKBOOTIMG_ARGS               := --ramdisk_offset 0x02000000 --tags_offset 0x01E00000
+TARGET_KERNEL_SOURCE               := kernel/lenovo/msm8974
+TARGET_KERNEL_ARCH                 := arm
+TARGET_KERNEL_CONFIG               := cyanogenmod_kingdom_row_defconfig
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := arm-linux-androideabi-
-BOARD_DTBTOOL_ARGS := -2
+BOARD_DTBTOOL_ARGS                 := -2
 
 # Vendor Init
-TARGET_INIT_VENDOR_LIB := libinit_msm
-TARGET_LIBINIT_DEFINES_FILE := $(CANCRO_PATH)/init/init_kingdom_row.cpp
+TARGET_UNIFIED_DEVICE       := true
+TARGET_INIT_VENDOR_LIB      := libinit_msm
+TARGET_LIBINIT_DEFINES_FILE := $(KINGDOM_ROW_PATH)/init/init_kingdom_row.cpp
 
 # QCOM hardware
-BOARD_USES_QCOM_HARDWARE := true
-TARGET_POWERHAL_VARIANT := qcom
-TARGET_POWERHAL_SET_INTERACTIVE_EXT := $(CANCRO_PATH)/power/power_ext.c
+BOARD_USES_QCOM_HARDWARE            := true
+TARGET_POWERHAL_VARIANT             := qcom
+TARGET_POWERHAL_SET_INTERACTIVE_EXT := $(KINGDOM_ROW_PATH)/power/power_ext.c
 
 # Audio
-BOARD_USES_ALSA_AUDIO := true
+BOARD_USES_ALSA_AUDIO                      := true
 AUDIO_FEATURE_ENABLED_MULTI_VOICE_SESSIONS := true
 
 # FM Radio
 TARGET_FM_LEGACY_PATCHLOADER := true
 
 # Bluetooth
-BOARD_HAVE_BLUETOOTH := true
-BOARD_HAVE_BLUETOOTH_QCOM := true
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(CANCRO_PATH)/bluetooth
-QCOM_BT_USE_SMD_TTY := true
-BLUETOOTH_HCI_USE_MCT := true
+BOARD_HAVE_BLUETOOTH                        := true
+BOARD_HAVE_BLUETOOTH_QCOM                   := true
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(KINGDOM_ROW_PATH)/bluetooth
+QCOM_BT_USE_SMD_TTY                         := true
+BLUETOOTH_HCI_USE_MCT                       := true
 
 # Radio
 TARGET_RIL_VARIANT                := caf
 FEATURE_QCRIL_UIM_SAP_SERVER_MODE := true
 
 # Graphics
-BOARD_EGL_CFG := $(CANCRO_PATH)/configs/egl.cfg
-USE_OPENGL_RENDERER := true
-TARGET_USES_C2D_COMPOSITION := true
+USE_OPENGL_RENDERER               := true
+TARGET_USES_C2D_COMPOSITION       := true
 TARGET_USE_COMPAT_GRALLOC_PERFORM := true
-TARGET_USES_ION := true
-OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
-HAVE_ADRENO_SOURCE:= false
-VSYNC_EVENT_PHASE_OFFSET_NS := 7500000
-SF_VSYNC_EVENT_PHASE_OFFSET_NS := 5000000
+TARGET_USES_ION                   := true
+OVERRIDE_RS_DRIVER                := libRSDriver_adreno.so
+HAVE_ADRENO_SOURCE                := false
+VSYNC_EVENT_PHASE_OFFSET_NS       := 7500000
+SF_VSYNC_EVENT_PHASE_OFFSET_NS    := 5000000
 
 # Shader cache config options
 # Maximum size of the  GLES Shaders that can be cached for reuse.
@@ -122,34 +119,32 @@ WIFI_DRIVER_FW_PATH_AP           := "ap"
 TARGET_USES_QCOM_WCNSS_QMI       := true
 
 # Filesystem
-TARGET_USERIMAGES_USE_EXT4         := true
-BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
+TARGET_USERIMAGES_USE_EXT4          := true
+BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE   := ext4
 BOARD_PERSISTIMAGE_FILE_SYSTEM_TYPE := ext4
-BOARD_BOOTIMAGE_PARTITION_SIZE := 20971520
-BOARD_RECOVERYIMAGE_PARTITION_SIZE := 20971520
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 2147483648
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 12815659008
-BOARD_USERDATAEXTRAIMAGE_PARTITION_SIZE := 59718467072
-BOARD_USERDATAEXTRAIMAGE_PARTITION_NAME := 64G
-BOARD_CACHEIMAGE_PARTITION_SIZE := 134217728
-BOARD_PERSISTIMAGE_PARTITION_SIZE := 33554432
-BOARD_FLASH_BLOCK_SIZE := 131072
+BOARD_BOOTIMAGE_PARTITION_SIZE      := 20971520
+BOARD_RECOVERYIMAGE_PARTITION_SIZE  := 20971520
+BOARD_SYSTEMIMAGE_PARTITION_SIZE    := 2147483648
+BOARD_USERDATAIMAGE_PARTITION_SIZE  := 12815659008
+BOARD_CACHEIMAGE_PARTITION_SIZE     := 134217728
+BOARD_PERSISTIMAGE_PARTITION_SIZE   := 16384000
+BOARD_FLASH_BLOCK_SIZE              := 131072
 
 # Recovery
-RECOVERY_FSTAB_VERSION := 2
-TARGET_RECOVERY_FSTAB := $(CANCRO_PATH)/rootdir/root/fstab.qcom
-BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_23x41.h\"
-TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
+RECOVERY_FSTAB_VERSION             := 2
+TARGET_RECOVERY_FSTAB              := $(KINGDOM_ROW_PATH)/rootdir/root/fstab.qcom
+TARGET_RECOVERY_PIXEL_FORMAT       := "RGBX_8888"
 TARGET_RECOVERY_LCD_BACKLIGHT_PATH := \"/sys/class/leds/lcd-backlight/brightness\"
 
 # CM Hardware
-BOARD_HARDWARE_CLASS += $(CANCRO_PATH)/cmhw
+BOARD_HARDWARE_CLASS += \
+    $(KINGDOM_ROW_PATH)/cmhw
 
 # No old RPC for prop
 TARGET_NO_RPC := true
 
 # GPS HAL lives here
-TARGET_GPS_HAL_PATH := $(CANCRO_PATH)/gps
+TARGET_GPS_HAL_PATH         := $(KINGDOM_ROW_PATH)/gps
 TARGET_PROVIDES_GPS_LOC_API := true
 
 # Lights
@@ -160,9 +155,6 @@ TARGET_HW_DISK_ENCRYPTION := false
 
 # Added to indicate that protobuf-c is supported in this build
 PROTOBUF_SUPPORTED := true
-
-# Compatibility with pre-kitkat Qualcomm sensor HALs
-SENSORS_NEED_SETRATE_ON_ENABLE := true
 
 # ANT+
 BOARD_ANT_WIRELESS_DEVICE := "vfs-prerelease"
@@ -178,8 +170,7 @@ BOARD_USES_QC_TIME_SERVICES := true
 
 # Charger
 BOARD_CHARGER_ENABLE_SUSPEND := true
-
-BOARD_HAS_NO_SELECT_BUTTON := true
+BOARD_CHARGER_DISABLE_INIT_BLANK := true
 
 # Enable dex-preoptimization to speed up first boot sequence
 ifeq ($(HOST_OS),linux)
@@ -196,6 +187,6 @@ DONT_DEXPREOPT_PREBUILTS := true
 include device/qcom/sepolicy/sepolicy.mk
 
 BOARD_SEPOLICY_DIRS += \
-        $(CANCRO_PATH)/sepolicy
+        $(KINGDOM_ROW_PATH)/sepolicy
 
 -include vendor/lenovo/kingdom_row/BoardConfigVendor.mk

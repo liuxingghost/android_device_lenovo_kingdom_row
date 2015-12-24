@@ -24,7 +24,7 @@
 
 #define BLUETOOTH_QCOM_SW TRUE
 
-#define BTM_DEF_LOCAL_NAME   "Lenovo Vibe Z2 Pro"
+#define BTM_DEF_LOCAL_NAME   "Lenovo K920"
 // Enables Interleave scan
 #define BTA_HOST_INTERLEAVE_SEARCH  TRUE
 // Disables read remote device feature

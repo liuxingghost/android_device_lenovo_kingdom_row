@@ -85,13 +85,13 @@ void init_msm_properties(unsigned long msm_id, unsigned long msm_ver, char *boar
             property_set("ro.product.model", "MI 3W");
             break;
         case 1972:
-            property_set("ro.product.model", "K920");
+            property_set("ro.product.model", "Lenovo K920");
             property_set("ro.telephony.default_network", "10");
             property_set("ro.ril.def.preferred.network", "10");
             break;
         default:
             // Other unsupported variants
-            property_set("ro.product.model", "Unsupported Phone Model");
+            property_set("ro.product.model", "Unsupported Lenovo K920");
             break;
     }
 }
